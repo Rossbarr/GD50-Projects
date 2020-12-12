@@ -12,6 +12,7 @@ function PlayState:init()
 	self.pipePairs = {}
 	self.timer = 0
 	self.score = 0
+	self.newPipeTime = 2
 	
 	self.lastY = -PIPE_HEIGHT + math.random(80) + 20
 end
@@ -19,13 +20,14 @@ end
 function PlayState:update(dt)
 	self.timer = self.timer + dt
 	
-	if self.timer > 2 then
+	if self.timer > self.newPipeTime then
 		local y = math.max(-PIPE_HEIGHT + 10,
 			math.min(self.lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
 		self.lastY = y
 	
 		table.insert(self.pipePairs, PipePair(y))
 		self.timer = 0
+		self.newPipeTime = math.random(1.5, 2.5)
 	end
 	
 	self.bird:update(dt)
@@ -56,6 +58,10 @@ function PlayState:update(dt)
 		sounds['hurt']:play()
 
 	end
+end
+
+function PlayState:enter()
+	gScrolling = true
 end
 
 function PlayState:render()

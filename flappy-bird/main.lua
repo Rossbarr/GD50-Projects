@@ -18,6 +18,8 @@ WINDOW_HEIGHT = 720
 VIRTUAL_WIDTH = 512
 VIRTUAL_HEIGHT = 288
 
+gScrolling = true
+
 local background = love.graphics.newImage('background.png')
 local backgroundScroll = 0
 local BACKGROUND_SCROLL_SPEED = 30
@@ -65,15 +67,19 @@ function love.load()
 	sounds['music']:play()
 
 	love.keyboard.keysPressed = {}
+	love.mouse.buttonsPressed = {}
 end
 
 function love.update(dt)
-	backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
-	groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
+	if gScrolling then
+		backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
+		groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
+	end
 	
 	gStateMachine:update(dt)
 	
 	love.keyboard.keysPressed = {}
+	love.mouse.buttonsPressed = {}
 end
 
 function love.draw()
@@ -102,6 +108,14 @@ function love.keyboard.wasPressed(key)
 	else
 		return false
 	end
+end
+
+function love.mousepressed(x, y, button)
+	love.mouse.buttonsPressed[button] = true
+end
+
+function love.mouse.wasPressed(button)
+	return love.mouse.buttonsPressed[button]
 end
 
 function love.resize(w, h)
