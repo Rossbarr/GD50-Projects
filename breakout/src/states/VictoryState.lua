@@ -5,16 +5,12 @@ function VictoryState:enter(params)
     self.score = params.score
     self.paddle = params.paddle
     self.health = params.health
-    self.ball = params.ball
     self.highScores = params.highScores
     self.recoverPoints = params.recoverPoints
 end
 
 function VictoryState:update(dt)
     self.paddle:update(dt)
-
-    self.ball.x = self.paddle.x + (self.paddle.width + self.ball.width) / 2
-    self.ball.y = self.paddle.y - self.ball.height
 
     if love.keyboard.wasPressed("enter") or love.keyboard.wasPressed("return") then
         gStateMachine:change("serve", {
@@ -31,7 +27,6 @@ end
 
 function VictoryState:render()
     self.paddle:render()
-    self.ball:render()
 
     renderHealth(self.health)
     renderScore(self.score)

@@ -28,7 +28,8 @@ function love.load()
 		["balls"] = GenerateQuadsBalls(gTextures["main"]),
 		["bricks"] = GenerateQuadsBricks(gTextures["main"]),
 		["hearts"] = GenerateQuads(gTextures["hearts"], 10, 9),
-		["arrows"] = GenerateQuads(gTextures["arrows"], 24, 24)
+		["arrows"] = GenerateQuads(gTextures["arrows"], 24, 24),
+		["powerups"] = GenerateQuadsPowerups(gTextures["main"])
 	}
 	
 	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -108,7 +109,7 @@ function love.draw()
 						VIRTUAL_HEIGHT / (backgroundHeight - 1))
 						
 	gStateMachine:render()
-	
+
 	displayFPS()
 	
 	push:finish()

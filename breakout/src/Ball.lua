@@ -1,11 +1,14 @@
 Ball = Class{}
 
 function Ball:init(skin)
+	self.x = VIRTUAL_WIDTH / 2 - 2
+	self.y = VIRTUAL_HEIGHT / 2 - 2
+
 	self.width = 8
 	self.height = 8
 	
-	self.dx = 0
-	self.dy = 0
+	self.dx = math.random(-100, 100)
+	self.dy = math.random(-50, -60)
 	
 	self.skin = skin
 end

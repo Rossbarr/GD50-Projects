@@ -8,6 +8,7 @@ require "src/Paddle"
 require "src/Ball"
 require "src/Brick"
 require "src/LevelMaker"
+require "src/Powerups"
 
 require "src/states/BaseState"
 require "src/states/StartState"
